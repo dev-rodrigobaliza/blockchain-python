@@ -29,6 +29,19 @@ def route_blockchain():
     return jsonify(blockchain.to_json())
 
 
+@app.route('/blockchain/range')
+def route_blockchai_range():
+    start = int(request.args.get('start'))
+    end = int(request.args.get('end'))
+
+    return jsonify(blockchain.to_json()[::-1][start:end])
+
+
+@app.route('/blockchain/length')
+def route_blockchai_length():
+    return jsonify(len(blockchain.chain))
+
+
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
     transaction_data = transaction_pool.transaction_data()
